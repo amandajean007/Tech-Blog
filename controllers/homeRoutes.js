@@ -82,7 +82,7 @@ router.get('/login', (req, res) => {
 });
 
 // Get all comments
-router.get('/comment', withAuth, async (req, res) => {
+router.get('/post/:id/comment', withAuth, async (req, res) => {
   try {
     console.log("hello!");
     const commentData = await Comment.findAll({
@@ -91,7 +91,7 @@ router.get('/comment', withAuth, async (req, res) => {
           model: User,
           attributes: ['name'],
         }
-      ],
+      ]
     });
 
     // Serialize data so the template can read it
@@ -106,12 +106,5 @@ router.get('/comment', withAuth, async (req, res) => {
     res.redirect('/login');
   }
 });
-
-
-
-
-
-
-
 
 module.exports = router;
