@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const { Post, User } = require('../models');
+const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 // ('/')
 
-// homepage // Get all Posts and JOIN with user data
+// homepage - Get all Posts and JOIN with user data
 router.get('/', withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -12,13 +12,12 @@ router.get('/', withAuth, async (req, res) => {
         {
           model: User,
           attributes: ['name'],
-        },
+        }
       ],
     });
 
     // Serialize data so the template can read it
     const posts = postData.map((post) => post.get({ plain: true }));
-
     // Pass serialized data and session flag into template
     res.render('homepage', { 
       posts, 
@@ -52,6 +51,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
   }
 });
 
+
 // Find the logged in user based on the session ID
 router.get('/profile', withAuth, async (req, res) => {
   try {
@@ -80,5 +80,38 @@ router.get('/login', (req, res) => {
   }
   res.render('login');
 });
+
+// Get all comments
+router.get('/comment', withAuth, async (req, res) => {
+  try {
+    console.log("hello!");
+    const commentData = await Comment.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        }
+      ],
+    });
+
+    // Serialize data so the template can read it
+    const comments = commentData.map((post) => post.get({ plain: true }));
+    console.log("homeRoutes line 102 'comments': ", comments);
+    // Pass serialized data and session flag into template
+    res.render('homepage', { 
+      comments, 
+      logged_in: req.session.logged_in 
+    });
+  } catch (err) {
+    res.redirect('/login');
+  }
+});
+
+
+
+
+
+
+
 
 module.exports = router;

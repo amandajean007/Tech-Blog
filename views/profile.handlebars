@@ -31,6 +31,7 @@
     <div class="row mb-2">
       <div class="col-md-8">
         <h4><a href="/post/{{post.id}}">{{post.name}}</a></h4>
+        <p>Created on {{format_date post.date_created}}</p>
       </div>
       <div class="col-md-4">
         <button class="btn btn-sm btn-danger" data-id="{{post.id}}">DELETE</button>
@@ -42,3 +43,10 @@
 </div>
 
 <script src="./js/post.js"></script>
+
+
+
+
+
+
+
