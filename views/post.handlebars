@@ -24,11 +24,10 @@
 
 <div class="col-md-6 comment-list flex container">
   <h3>Comments:</h3>
-
   {{#each comments as |comment|}}
   <div class="row mb-2">
     <div class="col-md-8">
-      <h4><a href="/comment/{{comment.comment_id}}">{{comment.body}}</a></h4>
+      <h4><a href="/comment/{{comment.id}}">{{comment.body}}</a></h4>
     </div>
     <div class="col-md-4">
       <button class="btn btn-sm btn-danger" data-id="{{comment.id}}">DELETE</button>

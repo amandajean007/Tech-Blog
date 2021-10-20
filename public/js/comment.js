@@ -6,10 +6,10 @@ const newCommentHandler = async (event) => {
   // const timeAndDate = document.querySelector('#timeAndDate').value.trim();
   const description = document.querySelector('#comment-desc').value.trim();
 
-  if (name && description) {
-    const response = await fetch(`/api/comment`, {
+  if (body) {
+    const response = await fetch(`/api/post?:id/comment`, {
       method: 'POST',
-      body: JSON.stringify({ name, description }),
+      body: JSON.stringify({ body }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -28,7 +28,7 @@ const delButtonHandler = async (event) => {
   if (event.target.hasAttribute('data-id')) {
     const id = event.target.getAttribute('data-id');
 
-    const response = await fetch(`/api/comment/${id}`, {
+    const response = await fetch(`/api/post/:id/comment/${id}`, {
       method: 'DELETE',
     });
 

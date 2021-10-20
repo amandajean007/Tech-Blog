@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post } = require('../../models');
+const { Post, Comment, } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // ('api/post')
@@ -7,12 +7,12 @@ const withAuth = require('../../utils/auth');
 // Gets all posts
 router.get('/', async (req, res) => {
   try {
-      const commentData = await Post.findAll();
-      if (!commentData) {
+      const postData = await Post.findAll();
+      if (!postData) {
           res.status(404).json({message: 'No post data found'});
           return;
       }
-      res.status(200).json(commentData);
+      res.status(200).json(postData);
   } catch (err) {
       res.status(500).json(err);
   }
@@ -21,13 +21,43 @@ router.get('/', async (req, res) => {
 // Create post
 router.post('/', withAuth, async (req, res) => {
   try {
-    console.log("line 10 postRoutes / create a post");
+    console.log("line 24 postRoutes / create a post");
     const newPost = await Post.create({
       ...req.body,
         user_id: req.session.user_id,
     });
     res.status(200).json(newPost)
     console.log(newPost);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+// Gets all comments
+router.get('/:id/comment', async (req, res) => {
+  console.log("this works");
+  try {
+      const commentData = await Comment.findAll();
+      if (!commentData) {
+          res.status(404).json({message: 'No comment data found'});
+          return;
+      }
+      res.status(200).json(commentData);
+  } catch (err) {
+      res.status(500).json(err);
+  }
+});
+
+// Create comment
+router.post('/:id', withAuth, async (req, res) => {
+  try {
+    console.log("line 39 create a comment");
+    const newComment = await Comment.create({
+      ...req.body,
+        user_id: req.session.user_id,
+    });
+    res.status(200).json(newComment)
+    console.log(newComment);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -68,27 +98,5 @@ router.put('/:id', async (req, res) => {
       res.status(500).json(err);
   }
 })
-
-// Post a comment
-router.post('/:id/comment', withAuth, async (req, res) => {
-  console.log("this route works to post a comment");
-  try {
-  //   req.body.user_id = req.session.user_id;
-      const newComment = await Comment.create({
-          ...req.body,
-          user_id: req.session.user_id,
-      });
-      res.status(200).json({ newComment, message:"Comment sucessfully created."})
-  } catch (err) {
-    res.status(500).json(err);
-    console.log('post comment error');
-  }
-});
-
-
-
-
-
-
 
 module.exports = router;
