@@ -31,14 +31,6 @@ router.get('/', withAuth, async (req, res) => {
 // find post by id
 router.get('/post/:id', withAuth, async (req, res) => {
   try {
-    // const postData = await Post.findByPk(req.params.id, {
-    //   include: [
-    //     {
-    //       model: User,
-    //       attributes: ['name'],
-    //     },
-    //   ],
-    // });
     const postData = await Post.findOne({
       where: { id: req.params.id },
       include: User,
@@ -50,7 +42,6 @@ router.get('/post/:id', withAuth, async (req, res) => {
 
     const post = postData.get({ plain: true });
     const comments = commentData.map((comment) => comment.get({ plain: true }));
-
 
     res.render('post', {
       ...post,
