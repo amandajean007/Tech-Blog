@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, Comment, } = require('../../models');
+const { Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // ('api/post')
@@ -33,20 +33,20 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
-// Gets all comments
-router.get('/:id/comment', async (req, res) => {
-  console.log("this works");
-  try {
-      const commentData = await Comment.findAll();
-      if (!commentData) {
-          res.status(404).json({message: 'No comment data found'});
-          return;
-      }
-      res.status(200).json(commentData);
-  } catch (err) {
-      res.status(500).json(err);
-  }
-});
+// // Gets all comments
+// router.get('/:id', async (req, res) => {
+//   console.log("this works");
+//   try {
+//       const commentData = await Comment.findAll();
+//       if (!commentData) {
+//           res.status(404).json({message: 'No comment data found'});
+//           return;
+//       }
+//       res.status(200).json(commentData);
+//   } catch (err) {
+//       res.status(500).json(err);
+//   }
+// });
 
 // Create comment
 router.post('/:id', withAuth, async (req, res) => {

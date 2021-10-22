@@ -1,7 +1,7 @@
 {
   "name": "techblog",
   "version": "1.0.0",
-  "description": "",
+  "description": "Cool",
   "main": "server.js",
   "engines": {
     "node": "12.11.1"

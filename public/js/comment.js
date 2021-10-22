@@ -2,12 +2,10 @@
 const newCommentHandler = async (event) => {
   event.preventDefault();
 
-  const name = document.querySelector('#comment-name').value.trim();
-  // const timeAndDate = document.querySelector('#timeAndDate').value.trim();
-  const description = document.querySelector('#comment-desc').value.trim();
+  const body = document.querySelector('#comment-desc').value.trim();
 
   if (body) {
-    const response = await fetch(`/api/post?:id/comment`, {
+    const response = await fetch(`/api/post/${id}/comment`, {
       method: 'POST',
       body: JSON.stringify({ body }),
       headers: {
