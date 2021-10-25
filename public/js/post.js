@@ -4,10 +4,10 @@ const newFormHandler = async (event) => {
 
   const name = document.querySelector('#post-name').value.trim();
   // const timeAndDate = document.querySelector('#timeAndDate').value.trim();
-  const description = document.querySelector('#post-desc').value.trim();
+  const description = document.querySelector('#comment').value.trim();
 
-  if (name && description) {
-    const response = await fetch(`/api/post`, {
+  if (description) {
+    const response = await fetch(`/api/comments`, {
       method: 'POST',
       body: JSON.stringify({ name, description }),
       headers: {
@@ -16,9 +16,35 @@ const newFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace('/profile');
+      document.location.reload;
     } else {
-      alert('Failed to create post');
+      alert('Failed to create comment');
+    }
+  }
+};
+
+// Update Post
+const updateFormHandler = async (event) => {
+  event.preventDefault();
+
+  const name = document.querySelector("#update-name").value.trim();
+  const description = document.querySelector("#update-desc").value.trim();
+  const id = event.target.getAttribute("data-blog_id");
+  console.log(event.target);
+  console.log(id);
+  if (name && description) {
+    const response = await fetch(`/api/blogs/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({ name, description }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      document.location.replace("/profile");
+    } else {
+      alert("Failed to update post");
     }
   }
 };
@@ -43,6 +69,10 @@ const delButtonHandler = async (event) => {
 document
   .querySelector('.new-post-form')
   .addEventListener('submit', newFormHandler);
+
+document
+  .querySelector(".update-form")
+  .addEventListener("submit", updateFormHandler);
 
 document
   .querySelector('.post-list')

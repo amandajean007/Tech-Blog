@@ -3,6 +3,18 @@
   <p>{{description}}</p>
   <p>Created by {{user.name}} on {{format_date date_created}}</p>
 </div>
+<form class="form update-form" data-blog_id={{id}}>
+  <div class="form-group">
+    <textarea class="form-input" id="update-name" name="update-name" placeholder="{{name}}"></textarea>
+  </div>
+  <div class="form-group">
+    <textarea class="form-input" id="update-desc" name="update-desc" placeholder="{{description}}"></textarea>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Update</button>
+  </div>
+</div>
+</form>
 
 
 <div class="row mt-4">
