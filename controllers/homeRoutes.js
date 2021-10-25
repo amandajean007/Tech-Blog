@@ -5,7 +5,7 @@ const withAuth = require('../utils/auth');
 // ('/')
 
 // homepage - Get all Posts and JOIN with user data
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const postData = await Post.findAll({
       include: [
@@ -24,29 +24,29 @@ router.get('/', withAuth, async (req, res) => {
       logged_in: req.session.logged_in 
     });
   } catch (err) {
-    res.redirect('/login');
+    res.status(500).json(err);
   }
 });
 
 // find post by id
-router.get('/post/:id', withAuth, async (req, res) => {
+router.get("/post/:id", async (req, res) => {
   try {
-    const postData = await Post.findOne({
-      where: { id: req.params.id },
-      include: User,
-    });
-    const commentData = await Comment.findAll({
-      where: { post_id: req.params.id },
-      include: User,
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+        Comment,
+      ],
     });
 
     const post = postData.get({ plain: true });
-    const comments = commentData.map((comment) => comment.get({ plain: true }));
 
-    res.render('post', {
+    res.render("post", {
       ...post,
-      ...comments,
-      logged_in: req.session.logged_in
+      comments: post.comments,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
