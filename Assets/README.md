@@ -28,7 +28,7 @@ Going on vacation
   - CSS
   - Bootstrap
   - SQL
-  - 
+
 ## License <a name="license"></a>
 MIT License
 Contributions <a name="contributions"></a>
