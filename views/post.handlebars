@@ -20,7 +20,6 @@
 <div class="row mt-4">
   <div class="col-md-6 container">
     <h3>Add a comment:</h3>
-
     <form class="form new-comment-form">
       <div class="form-group">
         <label for="comment">Comment:</label>
@@ -34,6 +33,8 @@
 </div>
 <div>
 
+
+{{#if comments.length}}
 <div class="col-md-6 comment-list flex container">
   <h3>Comments:</h3>
   {{#each comments as |comment|}}
@@ -47,3 +48,6 @@
   </div>
   {{/each}}
 </div>
+{{/if}}
+
+<script src="/js/blog.js"></script>
