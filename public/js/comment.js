@@ -1,28 +1,55 @@
-// New Post
+// New Comment
 const newCommentHandler = async (event) => {
   event.preventDefault();
 
   const body = document.querySelector('#comment-desc').value.trim();
+  const post_id = event.target.getAttribute("data-post_id");
 
   if (body) {
-    const response = await fetch(`/api/post/${id}/comment`, {
+    const response = await fetch(`/api/comment`, {
       method: 'POST',
-      body: JSON.stringify({ body }),
+      body: JSON.stringify({ body, post_id }),
       headers: {
         'Content-Type': 'application/json',
       },
     });
 
     if (response.ok) {
-      document.location.replace('/');
+      document.location.reload;
     } else {
       alert('Failed to create comment');
     }
   }
 };
 
-// Delete Post
-const delButtonHandler = async (event) => {
+// Update Comment
+const updateCommentHandler = async (event) => {
+  event.preventDefault();
+
+  const name = document.querySelector("#update-name").value.trim();
+  const description = document.querySelector("#update-desc").value.trim();
+  const id = event.target.getAttribute("data-post_id");
+  console.log(event.target);
+  console.log(id);
+  if (name && description) {
+    const response = await fetch(`/api/post/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({ name, description }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      document.location.replace("/profile");
+    } else {
+      alert("Failed to update comment");
+    }
+  }
+};
+
+// Delete Comment
+const deleteCommentHandler = async (event) => {
   if (event.target.hasAttribute('data-id')) {
     const id = event.target.getAttribute('data-id');
 
@@ -43,5 +70,9 @@ document
   .addEventListener('submit', newCommentHandler);
 
 document
+  .querySelector(".update-form")
+  .addEventListener("submit", updateCommentHandler);
+
+document
   .querySelector('.comment-list')
-  .addEventListener('click', delButtonHandler);
+  .addEventListener('click', deleteCommentHandler);

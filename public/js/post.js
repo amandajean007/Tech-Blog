@@ -1,13 +1,13 @@
 // New Post
-const newFormHandler = async (event) => {
+const newPostHandler = async (event) => {
   event.preventDefault();
 
   const name = document.querySelector('#post-name').value.trim();
   // const timeAndDate = document.querySelector('#timeAndDate').value.trim();
-  const description = document.querySelector('#comment').value.trim();
+  const description = document.querySelector('#post-desc').value.trim();
 
-  if (description) {
-    const response = await fetch(`/api/comments`, {
+  if (name && description) {
+    const response = await fetch(`/api/post`, {
       method: 'POST',
       body: JSON.stringify({ name, description }),
       headers: {
@@ -16,41 +16,15 @@ const newFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.reload;
+      document.location.replace('/profile');
     } else {
-      alert('Failed to create comment');
-    }
-  }
-};
-
-// Update Post
-const updateFormHandler = async (event) => {
-  event.preventDefault();
-
-  const name = document.querySelector("#update-name").value.trim();
-  const description = document.querySelector("#update-desc").value.trim();
-  const id = event.target.getAttribute("data-blog_id");
-  console.log(event.target);
-  console.log(id);
-  if (name && description) {
-    const response = await fetch(`/api/blogs/${id}`, {
-      method: "PUT",
-      body: JSON.stringify({ name, description }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (response.ok) {
-      document.location.replace("/profile");
-    } else {
-      alert("Failed to update post");
+      alert('Failed to create post');
     }
   }
 };
 
 // Delete Post
-const delButtonHandler = async (event) => {
+const deletePostHandler = async (event) => {
   if (event.target.hasAttribute('data-id')) {
     const id = event.target.getAttribute('data-id');
 
@@ -68,12 +42,8 @@ const delButtonHandler = async (event) => {
 
 document
   .querySelector('.new-post-form')
-  .addEventListener('submit', newFormHandler);
-
-document
-  .querySelector(".update-form")
-  .addEventListener("submit", updateFormHandler);
+  .addEventListener('submit', newPostHandler);
 
 document
   .querySelector('.post-list')
-  .addEventListener('submit', delButtonHandler);
+  .addEventListener('submit', deletePostHandler);
