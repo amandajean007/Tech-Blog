@@ -35,7 +35,8 @@ Contributions <a name="contributions"></a>
 You can make contributions to my project here! https://github.com/amandajean007
 
 ## Illustrations <a name="illustrations"></a>
-![..]
+![Capture](https://user-images.githubusercontent.com/85036414/138790894-91f69768-0a7a-494e-b609-5275a94c9cef.PNG)
+
 
 ## Questions <a name="questions"></a>
 If you have any questions please reach out to me via E-Mail: ahanes35@yahoo.com
