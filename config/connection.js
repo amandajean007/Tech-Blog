@@ -10,6 +10,7 @@ if (process.env.JAWSDB_URL) {
     process.env.DB_NAME,
     process.env.DB_USER,
     process.env.DB_PASSWORD,
+    
     {
       host: 'localhost',
       dialect: 'mysql',
@@ -18,7 +19,24 @@ if (process.env.JAWSDB_URL) {
   );
 }
 
-module.exports = sequelize;
+// module.exports = sequelize;
 
 // cd OneDrive/desktop/Codes/Homework/Tech-Blog
 // heroku logs --app technology-blog-panda --tail
+
+// var mysql = require('mysql');
+// var connection;
+
+// if (process.env.JAWSDB_URL) {
+//   connection = mysql.createConnection(process.env.JAWSDB_URL);
+// } else {
+//   connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: 'Leah&Maya104618',
+//     database: 'techblog_db'
+//   });
+// };
+
+// connection.connect();
+// module.exports = connection;
