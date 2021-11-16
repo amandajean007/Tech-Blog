@@ -20,7 +20,7 @@ The project's aim is to create a working app where users can create posts and sh
 Head to this website "https://panda-tech-blog.herokuapp.com/"
 
 ## Examples of Use <a name="examples"></a>
-Going on vacation
+An example of use for this app would be for a web development class. Students could post things they have learned they think the other students would benefit from, as well as ask for help or start a study group.
 
 ## Technologies <a name="technologies"></a>
   - HTML
