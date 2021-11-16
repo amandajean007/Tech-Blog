@@ -17,7 +17,7 @@ The project's aim is to create a working app where users can create posts and sh
 10. [Sources](#sources)
 
 ## Installation <a name="installation"></a>
-Head to this website ""
+Head to this website "https://panda-tech-blog.herokuapp.com/"
 
 ## Examples of Use <a name="examples"></a>
 Going on vacation
